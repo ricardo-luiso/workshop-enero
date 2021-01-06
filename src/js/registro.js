@@ -17,7 +17,7 @@ function registrarUsuario() {
         password: password.value
     }
 
-    let result = apiFetchPOST('https://5ff5063516cf4f0017c20d0b.mockapi.io/api/v1/registry', usuario);
+    let result = apiFetchPOST('http://localhost:8000/register', usuario);
     result.then((resp) => {
         console.log(resp);
     }).catch((error) => {

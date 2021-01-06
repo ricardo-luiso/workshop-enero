@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express()
 const PORT = 8000
+const cors = require('cors')
 const users = [
     {
         'id': 1,
@@ -23,6 +24,7 @@ const users = [
 ]
 
 app.use(express.json());
+app.use(cors())
 
 app.post('/register', (req, res)=>{
     const {name, userName, correo, password, dinero} = req.body
