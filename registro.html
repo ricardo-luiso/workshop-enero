@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    <h1>Registro de usuario</h1>
+    <div>
+        <label for="name">Nombre:</label>
+        <input type="text" placeholder="Escriba su nombre" id="name" name="usuario" required>
+    </div>
+
+    <div>
+        <label for="userName">Nombre de usuario: </label>
+        <input type="text" placeholder="Escriba su usuario" id="userName" name="usuario" required>
+    </div>
+
+    <div>
+        <label for="correo">Direccion de email: </label>
+        <input type="email" placeholder="Escriba su email" id="correo" name="usuario" required>
+    </div>
+
+    <div>
+        <label for="passID">Password: </label>
+        <input type="password" placeholder="Escriba su password" id="passID" name="password" required>
+    </div>
+
+    <button id="submit">Submit</button>
+
+
+    <script src = "src/js/api.js"></script>
+    <script src ="src/js/registro.js"></script>
+</body>
+</html>
