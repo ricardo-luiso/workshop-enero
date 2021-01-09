@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="User" type="text">
+    <input id="pass" type="text">
+    <button id="btn">Iniciar</button>
+</body>
+<script src="js/api.js"></script>
+<script>
+    const User = document.getElementById('User')
+    const pass = document.getElementById('pass')
+    const btn = document.getElementById('btn')
+    btn.addEventListener('click', ()=>{
+        let body = {
+            userName: User.value,
+            password: pass.value
+        }
+        const result = apiFetchPOST('http://localhost:8000/login', body)
+
+        result.then((resp) => {
+        console.log(resp);
+
+        if(resp.status) {
+            alert('Welcome')
+        } else {
+            alert('Invalid Credentials')
+            localStorage.setItem('user', user.value);
+            
+        }
+        }).catch((error) => {
+        console.log(error);
+        })
+
+    })
+</script>
+</html>

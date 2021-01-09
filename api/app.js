@@ -1,7 +1,10 @@
 const express = require('express');
+const helmet = require('helmet')
+
 const app = express()
 const PORT = 8000
 const cors = require('cors')
+
 const users = [
     {
         'id': 1,
@@ -25,6 +28,9 @@ const users = [
 
 app.use(express.json());
 app.use(cors())
+app.use(helmet())
+
+
 
 app.post('/register', (req, res)=>{
     const {name, userName, correo, password, dinero} = req.body
@@ -52,8 +58,9 @@ app.post('/register', (req, res)=>{
 
 app.post('/login', (req, res)=>{
     const {userName, password} = req.body
-    const result = users.filter(user => user.userName === userName && user.password === password)
+    const result = users.filter(user => user.userName == userName && user.password == password)
     console.log(result);
+    console.log(userName, password);
     if (result.length > 0) {
         res.status(200).json({
             'message': 'Credenciales Correctas',
