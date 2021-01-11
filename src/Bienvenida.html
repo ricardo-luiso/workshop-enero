@@ -6,6 +6,17 @@
     <title>Bienvenidos!!!!!!!!</title>
 </head>
 <body>
-    <h1>BIENVENIDO</h1>
+    <h1>BIENVENIDO <span id="nameUser"></span></h1>
 </body>
+
+<script>
+    const nameUser = document.getElementById('nameUser')
+    const nameUserLocal = localStorage.getItem('user')
+    if (nameUserLocal) {
+        nameUser.textContent = nameUserLocal
+    } else {
+        window.location.href = 'login.html'
+    }
+</script>
+
 </html>

@@ -23,21 +23,16 @@
         const result = apiFetchPOST('http://localhost:8000/login', body)
 
         result.then((resp) => {
-
-        console.log(resp);
-
-        if(resp.status) {
-            alert('Welcome')
-        } else {
-            alert('Invalid Credentials')
-            localStorage.setItem('user', user.value);
-            
-        }
+            console.log(resp);
+            if (resp.status) {
+                localStorage.setItem('user', User.value)
+                window.location.href = 'Bienvenida.html'
+            }else{
+                alert('Invalid Credentials')
+            }
         }).catch((error) => {
-        console.log(error);
-
+            console.log(error);3
         })
-
     })
 </script>
 </html>
