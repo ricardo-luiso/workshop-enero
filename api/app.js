@@ -1,9 +1,10 @@
 const express = require('express');
-const helmet = require('helmet')
-
-const app = express()
-const PORT = 8000
-const cors = require('cors')
+const helmet = require('helmet');
+const jwt = require('jsonwebtoken');
+const app = express();
+const PORT = 8000;
+const cors = require('cors');
+const key = 'A7ADE4501FA34676F7A286191BEBB76DDD09B7D92036AC5347F8A4F6D5711526';
 
 const users = [
     {
@@ -62,9 +63,18 @@ app.post('/login', (req, res)=>{
     console.log(result);
     console.log(userName, password);
     if (result.length > 0) {
+        const payload = {
+            usuario: userName,
+            password: password
+        }
+        const token = jwt.sign(payload, key, {
+            expiresIn:120
+        });
+
         res.status(200).json({
             'message': 'Credenciales Correctas',
-            'status': true
+            'status': true, 
+            'jwt':token
         })
     } else {
         res.status(404).json({

@@ -25,7 +25,8 @@
         result.then((resp) => {
             console.log(resp);
             if (resp.status) {
-                localStorage.setItem('user', User.value)
+                localStorage.setItem('user', User.value);
+                localStorage.setItem('jwt', resp.jwt);
                 window.location.href = 'Bienvenida.html'
             }else{
                 alert('Invalid Credentials')
