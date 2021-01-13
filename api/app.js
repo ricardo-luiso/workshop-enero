@@ -1,9 +1,11 @@
 const express = require('express');
-const helmet = require('helmet')
+const helmet = require('helmet');
+const jwt = require('jsonwebtoken');
+const app = express();
+const PORT = 8000;
+const cors = require('cors');
+const key = '56688090F2E072F66D5EACA9EAEB42E47A508B5232256ACDEB72D7B6B81D0A7A';
 
-const app = express()
-const PORT = 8000
-const cors = require('cors')
 
 const users = [
     {
@@ -30,6 +32,28 @@ app.use(express.json());
 app.use(cors())
 app.use(helmet())
 
+
+const validateJwtMiddleware = (req, res, next) => {
+    const jwtToken = req.headers["authorization"];
+    if (!jwtToken) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+    const jwtClient = jwtToken.split(" ")[1];
+    console.log(jwtClient);
+    jwt.verify(jwtClient, key, (error, decoded) => {
+        if (error) {
+            return res.status(401).json({ message: "Token Expired" });
+        }
+        next();
+    });
+};
+
+app.post('/islogin', validateJwtMiddleware, (req, res) =>{
+    res.status(200).json({
+        'status' : true, 
+        'message' : "usuario logueado correctamente"
+    })
+});
 
 
 app.post('/register', (req, res)=>{
@@ -62,9 +86,16 @@ app.post('/login', (req, res)=>{
     console.log(result);
     console.log(userName, password);
     if (result.length > 0) {
+        let payload = {
+            usuario: userName,
+            password: password
+        }
+        const token = jwt.sign(payload, key,{
+            expiresIn:120})
         res.status(200).json({
             'message': 'Credenciales Correctas',
-            'status': true
+            'status': true,
+            'jwt':token
         })
     } else {
         res.status(404).json({
