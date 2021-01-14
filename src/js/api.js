@@ -8,13 +8,14 @@ const apiFetchGET = async (url) => {
     }
 }
 
-const apiFetchPOST = async (url, body) => {
+const apiFetchPOST = async (url, body, jwt="") => {
     try {
         let response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic '+btoa(jwt)
             },
             body: JSON.stringify(body)
         });

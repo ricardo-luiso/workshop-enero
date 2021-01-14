@@ -8,9 +8,22 @@
 <body>
     <h1>BIENVENIDO <span id="nameUser"></span></h1>
 </body>
-
+<script src="js/api.js"></script>
 <script>
     const nameUser = document.getElementById('nameUser')
+    const jwt = localStorage.getItem('jwt')
+    const result = apiFetchPOST('http://localhost:8000/islogin',{},jwt)
+
+        result.then((resp) => {
+            console.log(resp);
+            if (resp.status) {
+                console.log(resp);
+            }else{
+                window.location.href = 'login.html'
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
     const nameUserLocal = localStorage.getItem('user')
     if (nameUserLocal) {
         nameUser.textContent = nameUserLocal

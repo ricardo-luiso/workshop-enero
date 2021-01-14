@@ -21,8 +21,9 @@
             password: pass.value
         }
         const result = apiFetchPOST('http://localhost:8000/login', body)
-
+        
         result.then((resp) => {
+            let localJwt = localStorage.setItem('jwt', resp.jwt) 
             console.log(resp);
             if (resp.status) {
                 localStorage.setItem('user', User.value)
