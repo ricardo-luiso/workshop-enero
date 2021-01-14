@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const PORT = 8000;
 const cors = require('cors');
-const key = '56688090F2E072F66D5EACA9EAEB42E47A508B5232256ACDEB72D7B6B81D0A7A';
 
+const key = '56688090F2E072F66D5EACA9EAEB42E47A508B5232256ACDEB72D7B6B81D0A7A';
 
 const users = [
     {
@@ -86,15 +86,18 @@ app.post('/login', (req, res)=>{
     console.log(result);
     console.log(userName, password);
     if (result.length > 0) {
-        let payload = {
+
+        const payload = {
             usuario: userName,
             password: password
         }
-        const token = jwt.sign(payload, key,{
-            expiresIn:120})
+        const token = jwt.sign(payload, key, {
+            expiresIn:120
+        });
+
         res.status(200).json({
             'message': 'Credenciales Correctas',
-            'status': true,
+            'status': true, 
             'jwt':token
         })
     } else {
